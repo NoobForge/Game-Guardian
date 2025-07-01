@@ -1,5 +1,7 @@
 #imports
-
+import functools
+import threading
+import multiprocessing
 
 
 class gui:
@@ -12,6 +14,24 @@ class gui:
     def open_prevention_gui():
         pass
 
+
+def threaded(func):
+    """Decorator to automatically launch a function in a thread"""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        thread = threading.Thread(target=func, args=args, kwargs=kwargs)
+        thread.start()
+        return thread
+    return wrapper
+
+def multiprocessed(func):
+    """Decorator to automatically launch a function in a process"""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        process = multiprocessing.Process(target=func, args=args, kwargs=kwargs)
+        process.start()
+        return process
+    return wrapper
 
 def valorant_quota_achieved():
     #return true if the set quota has been achieved, otherwise false
