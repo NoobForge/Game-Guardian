@@ -4,7 +4,7 @@ import threading
 import multiprocessing
 import subprocess
 import plyer
-import psutil
+import config
 
 
 #global variables
