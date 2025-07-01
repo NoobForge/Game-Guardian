@@ -2,6 +2,9 @@
 import functools
 import threading
 import multiprocessing
+import subprocess
+import plyer
+import psutil
 
 
 #global variables
@@ -37,9 +40,8 @@ def multiprocessed(func):
         return process
     return wrapper
 
-def notify():
-    #send a desktop notification
-    pass
+def notify(message):
+    plyer.notification.notify(title = 'Game Guardian', message = message)
 
 
 def game_quota_achieved(game):
@@ -54,9 +56,9 @@ def process_running(game):
     #return true if game is running, otherwise false
     pass
 
-def kill_process(game):
-    #kill process
-    pass
+def kill_process(pid):
+    notify(f'killed {psutil.Process(pid).name()}')
+    subprocess.check_output(f'taskkill /f /pid {pid}')
 
 def process_maximised():
     #return false if process is minimised, otherwise true
