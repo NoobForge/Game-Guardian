@@ -55,16 +55,12 @@ def valorant_quota_achieved():
 def process_running(game):
     valorant_processes = [
         "VALORANT.exe",
-        "RiotClientServices.exe",
-        "vgc.exe",
-        "VanguardTray.exe",
     ]
     try:
         output = subprocess.check_output("tasklist", shell=True).decode()
         return any(proc in output for proc in valorant_processes)
     except subprocess.CalledProcessError:
         return False
-
 
 if process_running():
     print(True)
