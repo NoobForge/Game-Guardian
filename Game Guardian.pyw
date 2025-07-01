@@ -8,6 +8,7 @@ import config
 import autostart
 import win32gui
 import win32con
+import time
 
 
 #global variables
@@ -46,6 +47,9 @@ def multiprocessed(func):
 def notify(message):
     plyer.notification.notify(title = 'Game Guardian', message = message)
 
+def process_pid(process_name):
+    return subprocess.check_output(f'(Get-Process -Name "{process_name}").Id').decode()
+
 
 def game_quota_achieved(game):
     #return true if the set quota has been achieved, otherwise false
@@ -55,41 +59,37 @@ def valorant_quota_achieved():
     #return true if the set quota has been achieved, otherwise false
     pass
 
-def process_running(game):
-    valorant_processes = [
-        "VALORANT.exe",
-    ]
+def process_running(process_name):
     try:
-        output = subprocess.check_output("tasklist", shell=True).decode()
-        return any(proc in output for proc in valorant_processes)
-    except subprocess.CalledProcessError:
-        return False
+        return 'Get-Process' not in subprocess.check_output(f'powershell.exe Get-Process -Name {process_name}').decode()
+    except: return False
 
 def kill_process(process_name):
     try:
         subprocess.check_output(f'taskkill /f /im {process_name}')
-        notify(f'killed {process_name}')
+        notify(f'closed {process_name}')
     except: pass
 
 def process_maximised():
     #return false if process is minimised, otherwise true
     pass
 
-def minimize_process(window_title="VALORANT"):
+def minimize_process(process_name):
     def enum_handler(hwnd, _):
         if win32gui.IsWindowVisible(hwnd):
             title = win32gui.GetWindowText(hwnd)
-            if window_title.lower() in title.lower():
+            if process_name.lower() in title.lower():
                 print(f"Minimizing: {title}")
                 win32gui.ShowWindow(hwnd, win32con.SW_MINIMIZE)
-
     win32gui.EnumWindows(enum_handler, None)
 
 
 
 #testcode
+#time.sleep(5)
 #kill_process(valorant_process_name)
-minimize_process("VALORANT")
+#minimize_process("Discord")
+print(process_running('Valorant'))
 
 root = gui()
 
