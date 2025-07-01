@@ -62,10 +62,6 @@ def process_running(game):
     except subprocess.CalledProcessError:
         return False
 
-if process_running():
-    print(True)
-else:
-    print(False)
 
     pass
 
@@ -86,6 +82,7 @@ def minimize_process():
 
 root = gui()
 
+    
 #mainloop
 while True:
     pass
