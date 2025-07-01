@@ -4,6 +4,10 @@ import threading
 import multiprocessing
 
 
+#global variables
+
+
+
 class gui:
     def __init__(self):
         pass
@@ -33,32 +37,33 @@ def multiprocessed(func):
         return process
     return wrapper
 
-def valorant_quota_achieved():
-    #return true if the set quota has been achieved, otherwise false
-    pass
-
 def notify():
     #send a desktop notification
     pass
 
-def valorant_locked():
-    #return true of false after reading the config
+
+def game_quota_achieved(game):
+    #return true if the set quota has been achieved, otherwise false
     pass
 
-def valorant_running():
-    #return true if game is running, false if otherwise
+def valorant_quota_achieved():
+    #return true if the set quota has been achieved, otherwise false
     pass
 
-def kill_valorant():
-    #kill valorant game client process
+def process_running(game):
+    #return true if game is running, otherwise false
     pass
 
-def valorant_maximised():
-    #return false if valorant windows is minimised, otherwise true
+def kill_process(game):
+    #kill process
     pass
 
-def minimize_valorant():
-    #minimize valorant game client process
+def process_maximised():
+    #return false if process is minimised, otherwise true
+    pass
+
+def minimize_process():
+    #minimize process
     pass
 
 
