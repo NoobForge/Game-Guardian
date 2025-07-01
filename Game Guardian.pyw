@@ -5,6 +5,7 @@ import multiprocessing
 import subprocess
 import plyer
 import config
+import autostart
 
 
 #global variables
