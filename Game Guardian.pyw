@@ -6,6 +6,8 @@ import subprocess
 import plyer
 import config
 import autostart
+import win32gui
+import win32con
 
 
 #global variables
@@ -73,14 +75,21 @@ def process_maximised():
     #return false if process is minimised, otherwise true
     pass
 
-def minimize_process():
-    #minimize process
-    pass
+def minimize_process(window_title="VALORANT"):
+    def enum_handler(hwnd, _):
+        if win32gui.IsWindowVisible(hwnd):
+            title = win32gui.GetWindowText(hwnd)
+            if window_title.lower() in title.lower():
+                print(f"Minimizing: {title}")
+                win32gui.ShowWindow(hwnd, win32con.SW_MINIMIZE)
+
+    win32gui.EnumWindows(enum_handler, None)
+
 
 
 #testcode
-kill_process(valorant_process_name)
-
+#kill_process(valorant_process_name)
+minimize_process("VALORANT")
 
 root = gui()
 
