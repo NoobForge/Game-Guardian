@@ -8,7 +8,7 @@ import psutil
 
 
 #global variables
-
+valorant_process_name = 'VALORANT-Win64-Shipping.exe'
 
 
 class gui:
@@ -65,17 +65,11 @@ def process_running(game):
     except subprocess.CalledProcessError:
         return False
 
-
-if process_running():
-    print(True)
-else:
-    print(False)
-
-    pass
-
-def kill_process(pid):
-    notify(f'killed {psutil.Process(pid).name()}')
-    subprocess.check_output(f'taskkill /f /pid {pid}')
+def kill_process(process_name):
+    try:
+        subprocess.check_output(f'taskkill /f /im {process_name}')
+        notify(f'killed {process_name}')
+    except: pass
 
 def process_maximised():
     #return false if process is minimised, otherwise true
@@ -86,6 +80,8 @@ def minimize_process():
     pass
 
 
+#testcode
+kill_process(valorant_process_name)
 
 
 root = gui()
