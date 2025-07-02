@@ -12,7 +12,7 @@ import win32con
 import time
 import os
 import sys
-import singleton
+from tendo import singleton
 import valo_api
 import datetime
 
@@ -91,9 +91,9 @@ def process_pid(process_name):
 def quit():
     """Force quit the application"""
     subprocess.check_output(f'taskkill /f /pid {os.getpid()}')
-#try:
-#    me = singleton.SingleInstance()
-#except: quit()
+try:
+    me = singleton.SingleInstance()
+except: quit()
 
 #baler1on
 def utc_to_local(utc_str):
@@ -129,16 +129,12 @@ def valorant_quota_achieved():
                     matches_today += 1
         return matches_today
     
-    if config.read("valorant_quota_achieved"):
-        return True
-    else:
-        try:
-            for gamemode in config.read('valorant_mode_match_limit'):
-                if gamemode_played_today(gamemode) >= config.read('valorant_mode_match_limit')[gamemode]:
-                    config.write("valorant_quota_achieved", True)
-                    return True
-        except: notify('API Error')
-        return False
+    try:
+        for gamemode in config.read('valorant_mode_match_limit'):
+            if gamemode_played_today(gamemode) >= config.read('valorant_mode_match_limit')[gamemode]:
+                return True
+    except: notify('API Error')
+    return False
 
 #baler1on
 def process_running(process_name):
