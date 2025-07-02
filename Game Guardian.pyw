@@ -13,10 +13,22 @@ import time
 import os
 import sys
 import singleton
+import valo_api
+import datetime
+
+
+#global variables
+valo_api_key = 'HDEV-dec0a00b-3220-4745-81d7-f2908bf14a5d'
+player_name = 'blitz'
+player_tag = 'rizz'
+player_region = 'ap'
+
 
 #baler1on
 config.backup = os.path.join(os.path.dirname(__file__), 'config.json')
 config.path = os.path.join(os.getenv('APPDATA'), 'Game Guardian', 'config.json')
+
+valo_api.set_api_key(valo_api_key)
 
 def toggle_autostart():
     """Toggle autostart status in registry and config"""
@@ -28,10 +40,6 @@ def toggle_autostart():
         config.write('autostart',True)
 if autostart.exists('Game Guardian')!= config.read('autostart'):
     toggle_autostart()
-
-
-#global variables
-valorant_process_name = 'VALORANT-Win64-Shipping.exe'
 
 
 #snowwhiteohno
@@ -84,6 +92,18 @@ try:
     me = singleton.SingleInstance()
 except: quit()
 
+#baler1on
+def utc_to_local(utc_str):
+    if utc_str.endswith('Z'):
+        utc_str = utc_str[:-1]
+    try:
+        dt = datetime.datetime.strptime(utc_str, "%Y-%m-%dT%H:%M:%S.%f")
+    except:
+        dt = datetime.datetime.strptime(utc_str, "%Y-%m-%dT%H:%M:%S")
+    dt = dt.replace(tzinfo=datetime.timezone.utc)
+    local_dt = dt.astimezone()
+    return local_dt
+
 
 def game_quota_achieved(game):
     #return true if the set quota has been achieved, otherwise false
@@ -91,6 +111,18 @@ def game_quota_achieved(game):
 
 #baler1on
 def valorant_quota_achieved():
+    def gamemode_played_today(gamemode):
+        matches_today = 0
+        if gamemode == "All":
+            for match in valo_api.endpoints.get_lifetime_matches_by_name(version='v1', region='ap', name='blitz', tag='rizz'):
+                if utc_to_local(match.meta.started_at).date() == datetime.datetime.now().date():
+                    matches_today += 1
+        else:
+            for match in valo_api.endpoints.get_lifetime_matches_by_name(version='v1', region='ap', name='blitz', tag='rizz', mode=gamemode):
+                if utc_to_local(match.meta.started_at).date() == datetime.datetime.now().date():
+                    matches_today += 1
+        return matches_today
+    
     if config.read("valorant_quota_achieved"):
         return True
     else:
@@ -151,7 +183,7 @@ def minimize_process(process_name):
 
 #testcode
 #time.sleep(5)
-#kill_process(valorant_process_name)
+#kill_process('Valorant')
 #minimize_process("Discord")
 #print(process_running('Valorant'))
 #print(process_maximised('Valorant'))
