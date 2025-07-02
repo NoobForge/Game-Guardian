@@ -114,14 +114,17 @@ def game_quota_achieved(game):
 
 #baler1on
 def valorant_quota_achieved():
+    """Check if the daily match quota for Valorant has been achieved"""
+    global player_name, player_tag, player_region
+
     def gamemode_played_today(gamemode):
         matches_today = 0
         if gamemode == "All":
-            for match in valo_api.endpoints.get_lifetime_matches_by_name(version='v1', region='ap', name='blitz', tag='rizz'):
+            for match in valo_api.endpoints.get_lifetime_matches_by_name(version='v1', region=player_region, name=player_name, tag=player_tag):
                 if utc_to_local(match.meta.started_at).date() == datetime.datetime.now().date():
                     matches_today += 1
         else:
-            for match in valo_api.endpoints.get_lifetime_matches_by_name(version='v1', region='ap', name='blitz', tag='rizz', mode=gamemode):
+            for match in valo_api.endpoints.get_lifetime_matches_by_name(version='v1', region=player_region, name=player_name, tag=player_tag, mode=gamemode):
                 if utc_to_local(match.meta.started_at).date() == datetime.datetime.now().date():
                     matches_today += 1
         return matches_today
@@ -129,7 +132,13 @@ def valorant_quota_achieved():
     if config.read("valorant_quota_achieved"):
         return True
     else:
-        pass
+        try:
+            for gamemode in config.read('valorant_mode_match_limit'):
+                if gamemode_played_today(gamemode) >= config.read('valorant_mode_match_limit')[gamemode]:
+                    config.write("valorant_quota_achieved", True)
+                    return True
+        except: notify('API Error')
+        return False
 
 #baler1on
 def process_running(process_name):
