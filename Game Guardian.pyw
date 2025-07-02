@@ -70,8 +70,31 @@ def kill_process(process_name):
         notify(f'closed {process_name}')
     except: pass
 
-def process_maximised():
-    #return false if process is minimised, otherwise true
+def process_maximised(window_title="VALORANT"):
+    try:
+        def enum_handler(hwnd, result):
+            if win32gui.IsWindowVisible(hwnd):
+                title = win32gui.GetWindowText(hwnd)
+                if window_title.lower() in title.lower():
+                    result.append(hwnd)
+
+        result = []
+        win32gui.EnumWindows(enum_handler, result)
+
+        if result:
+            hwnd = result[0]
+            placement = win32gui.GetWindowPlacement(hwnd)
+            show_cmd = placement[1]
+            is_maximised = show_cmd != win32con.SW_SHOWMINIMIZED
+            print(is_maximised)
+            return is_maximised
+        else:
+            print(False)
+            return False
+    except Exception as e:
+        print(f"check nhi hori maximise ke liye: {e}")
+        return False
+    
     pass
 
 def minimize_process(process_name):
@@ -89,7 +112,8 @@ def minimize_process(process_name):
 #time.sleep(5)
 #kill_process(valorant_process_name)
 #minimize_process("Discord")
-print(process_running('Valorant'))
+#print(process_running('Valorant'))
+process_maximised(window_title="VALORANT") 
 
 root = gui()
 
