@@ -18,7 +18,7 @@ import singleton
 config.backup = os.path.join(os.path.dirname(__file__), 'config.json')
 config.path = os.path.join(os.getenv('APPDATA'), 'Game Guardian', 'config.json')
 
-def autostart():
+def autorun():
     """Toggle autostart status in registry and config"""
     if autostart.exists('Game Guardian')== True:
         autostart.remove('Game Guardian')
@@ -27,7 +27,7 @@ def autostart():
         autostart.add('Game Guardian',os.path.abspath(sys.argv[0]))
         config.write('autostart',True)
 if autostart.exists('Game Guardian')!= config.read('autostart'):
-    autostart()
+    autorun()
 
 
 #global variables
