@@ -1,3 +1,4 @@
+#baler1on
 """
 Configuration Manager
 Handles reading and writing to the config.json file that stores application settings.

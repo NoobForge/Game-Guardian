@@ -1,3 +1,4 @@
+#baler1on
 """
 Windows Registry Autostart Manager
 Handles adding/removing the application from Windows startup via registry.

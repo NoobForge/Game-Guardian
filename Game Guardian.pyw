@@ -15,6 +15,7 @@ import time
 valorant_process_name = 'VALORANT-Win64-Shipping.exe'
 
 
+#snowwhiteohno
 class gui:
     def __init__(self):
         pass
@@ -26,6 +27,7 @@ class gui:
         pass
 
 
+#baler1on
 def threaded(func):
     """Decorator to automatically launch a function in a thread"""
     @functools.wraps(func)
@@ -35,6 +37,7 @@ def threaded(func):
         return thread
     return wrapper
 
+#baler1on
 def multiprocessed(func):
     """Decorator to automatically launch a function in a process"""
     @functools.wraps(func)
@@ -44,9 +47,11 @@ def multiprocessed(func):
         return process
     return wrapper
 
+#baler1on
 def notify(message):
     plyer.notification.notify(title = 'Game Guardian', message = message)
 
+#baler1on
 def process_pid(process_name):
     return subprocess.check_output(f'(Get-Process -Name "{process_name}").Id').decode()
 
@@ -59,17 +64,20 @@ def valorant_quota_achieved():
     #return true if the set quota has been achieved, otherwise false
     pass
 
+#baler1on
 def process_running(process_name):
     try:
         return 'Get-Process' not in subprocess.check_output(f'powershell.exe Get-Process -Name {process_name}').decode()
     except: return False
 
+#baler1on
 def kill_process(process_name):
     try:
         subprocess.check_output(f'taskkill /f /im {process_name}')
         notify(f'closed {process_name}')
     except: pass
 
+#blitzdevdaddy
 def process_maximised(window_title="VALORANT"):
     try:
         def enum_handler(hwnd, result):
@@ -94,9 +102,8 @@ def process_maximised(window_title="VALORANT"):
     except Exception as e:
         print(f"check nhi hori maximise ke liye: {e}")
         return False
-    
-    pass
 
+#blitzdevdaddy
 def minimize_process(process_name):
     def enum_handler(hwnd, _):
         if win32gui.IsWindowVisible(hwnd):
