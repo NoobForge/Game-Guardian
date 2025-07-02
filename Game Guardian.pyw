@@ -47,10 +47,13 @@ class gui:
     def __init__(self):
         pass
 
-    def open_config_gui():
+    def open_setup_gui(self):
         pass
 
-    def open_prevention_gui():
+    def open_config_gui(self):
+        pass
+
+    def open_prevention_gui(self):
         pass
 
 
