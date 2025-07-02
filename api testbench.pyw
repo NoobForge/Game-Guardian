@@ -16,7 +16,7 @@ def utc_to_local(utc_str):
 valo_api.set_api_key('HDEV-dec0a00b-3220-4745-81d7-f2908bf14a5d')
 
 matches_today = 0
-for match in valo_api.endpoints.get_lifetime_matches_by_name(version='v1', region='ap', name='blitz', tag='rizz', mode='Competitive'):
+for match in valo_api.endpoints.get_lifetime_matches_by_name(version='v1', region='ap', name='blitz', tag='rizz', mode='Deathmatch'):
     if utc_to_local(match.meta.started_at).date() == datetime.datetime.now().date():
         matches_today += 1
 print(matches_today)

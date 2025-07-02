@@ -91,9 +91,9 @@ def process_pid(process_name):
 def quit():
     """Force quit the application"""
     subprocess.check_output(f'taskkill /f /pid {os.getpid()}')
-try:
-    me = singleton.SingleInstance()
-except: quit()
+#try:
+#    me = singleton.SingleInstance()
+#except: quit()
 
 #baler1on
 def utc_to_local(utc_str):
@@ -194,11 +194,9 @@ def minimize_process(process_name):
 
 
 #testcode
-#time.sleep(5)
-#kill_process('Valorant')
-#minimize_process("Discord")
-#print(process_running('Valorant'))
-#print(process_maximised('Valorant'))
+print(valorant_quota_achieved())
+
+
 
 root = gui()
 
