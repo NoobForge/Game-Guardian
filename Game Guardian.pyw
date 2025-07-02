@@ -1,3 +1,4 @@
+#blitzdevdaddy,snowwhiteohno,baler1on
 #imports
 import functools
 import threading
@@ -9,6 +10,24 @@ import autostart
 import win32gui
 import win32con
 import time
+import os
+import sys
+import singleton
+
+#baler1on
+config.backup = os.path.join(os.path.dirname(__file__), 'config.json')
+config.path = os.path.join(os.getenv('APPDATA'), 'Game Guardian', 'config.json')
+
+def autostart():
+    """Toggle autostart status in registry and config"""
+    if autostart.exists('Game Guardian')== True:
+        autostart.remove('Game Guardian')
+        config.write('autostart',False)
+    else:
+        autostart.add('Game Guardian',os.path.abspath(sys.argv[0]))
+        config.write('autostart',True)
+if autostart.exists('Game Guardian')!= config.read('autostart'):
+    autostart()
 
 
 #global variables
@@ -49,41 +68,57 @@ def multiprocessed(func):
 
 #baler1on
 def notify(message):
+    """Send a notification with the given message"""
     plyer.notification.notify(title = 'Game Guardian', message = message)
 
 #baler1on
 def process_pid(process_name):
+    """Get the process ID of a running process by its name"""
     return subprocess.check_output(f'(Get-Process -Name "{process_name}").Id').decode()
+
+#baler1on
+def quit():
+    """Force quit the application"""
+    subprocess.check_output(f'taskkill /f /pid {os.getpid()}')
+try:
+    me = singleton.SingleInstance()
+except: quit()
 
 
 def game_quota_achieved(game):
     #return true if the set quota has been achieved, otherwise false
     pass
 
+#baler1on
 def valorant_quota_achieved():
-    #return true if the set quota has been achieved, otherwise false
-    pass
+    if config.read("valorant_quota_achieved"):
+        return True
+    else:
+        pass
 
 #baler1on
 def process_running(process_name):
+    """Check if a process is running by its name"""
     try:
         return 'Get-Process' not in subprocess.check_output(f'powershell.exe Get-Process -Name {process_name}').decode()
     except: return False
 
 #baler1on
 def kill_process(process_name):
+    """Kill a process by its name"""
     try:
         subprocess.check_output(f'taskkill /f /im {process_name}')
         notify(f'closed {process_name}')
     except: pass
 
 #blitzdevdaddy
-def process_maximised(window_title="VALORANT"):
+def process_maximised(process_name):
+    """Check if a process is maximised by its window title"""
     try:
         def enum_handler(hwnd, result):
             if win32gui.IsWindowVisible(hwnd):
                 title = win32gui.GetWindowText(hwnd)
-                if window_title.lower() in title.lower():
+                if process_name.lower() in title.lower():
                     result.append(hwnd)
 
         result = []
@@ -94,10 +129,8 @@ def process_maximised(window_title="VALORANT"):
             placement = win32gui.GetWindowPlacement(hwnd)
             show_cmd = placement[1]
             is_maximised = show_cmd != win32con.SW_SHOWMINIMIZED
-            print(is_maximised)
             return is_maximised
         else:
-            print(False)
             return False
     except Exception as e:
         print(f"check nhi hori maximise ke liye: {e}")
@@ -105,6 +138,7 @@ def process_maximised(window_title="VALORANT"):
 
 #blitzdevdaddy
 def minimize_process(process_name):
+    """Minimize a process by its window title"""
     def enum_handler(hwnd, _):
         if win32gui.IsWindowVisible(hwnd):
             title = win32gui.GetWindowText(hwnd)
@@ -120,7 +154,7 @@ def minimize_process(process_name):
 #kill_process(valorant_process_name)
 #minimize_process("Discord")
 #print(process_running('Valorant'))
-process_maximised(window_title="VALORANT") 
+#print(process_maximised('Valorant'))
 
 root = gui()
 
