@@ -1,22 +1,40 @@
-🎮 GameGuardian: Valorant Playtime Blocker
-GameGuardian is a powerful  Python application made for windows, designed to help you manage your Valorant playtime. Set a daily limit, get notified when it's over, and automatically block the game to stay focused and in control.
+<p align="center">
+  <img src="https://github.com/NoobForge/Game-Guardian/valo.png" alt="GameGuardian Valorant Banner" width="700"/>
+</p>
 
-✨ Features
-⏱️ Custom Timer – Choose how long you want to play (1–240 minutes).
+<h1 align="center">🔥 GameGuardian: Valorant Playtime Blocker 🔥</h1>
 
-🖥️ Beautiful GUI – Built with a modern interface using CustomTkinter.
+<p align="center">
+  <strong>Limit your Valorant playtime with style — get notified, stay focused, and block the game when time runs out.</strong>
+</p>
 
-🔕 Smart Notifications – Alerts you with Jett Ace voiceline and system notifications when time's up.
+---
 
-💣 Automatic Game Blocker – Shuts down Valorant automatically after the limit is reached.
+## 🔥 Features
 
-🧠 Quiz Mode – Take a quiz to unlock more time if you’ve hit your limit.
+- 🕒 **Customizable Timer** – Choose your playtime (1–240 minutes).
+- 🖥️ **Beautiful UI** – Smooth, animated interface using CustomTkinter.
+- 🔔 **Smart Alerts** – Windows + sound notifications when time is up.
+- 💣 **Auto Shutdown** – Detects and shuts down Valorant after time limit.
+- 🧠 **Quiz Overide** – Earn back game time by completing a quiz.
 
-🔁 Manual Reset Option – Stop or restart the timer anytime you want.
+---
 
+## 🐍 Language
 
-Language: Python
+- **Python 3.10+**
+- Libraries used:
+  - [`CustomTkinter`](https://github.com/TomSchimansky/CustomTkinter)
+  - `psutil`
+  - `plyer`
+  - `time`, `threading`
 
+---
 
-👨‍💻 Made By
-Mallika Keshav Manas❤️
+## 📦 How to Run
+
+1. ✅ Make sure you have **Python 3.10+** installed.
+2. 📁 Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/gameguardian
+
