@@ -1,8 +1,4 @@
-
-<p align="center">
-  <img src="https://github.com/NoobForge/Game-Guardian/blob/main/banner2.png" alt="GameGuardian Valorant Banner" width="1000"/>
-</p>
-
+under development
 <table align="center">
   <tr>
     <td>
