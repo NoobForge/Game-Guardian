@@ -1,9 +1,13 @@
 
 <p align="center">
-  <img src="https://github.com/Blitzdevdaddy/Game-Guardian/blob/main/banner.png" alt="GameGuardian Valorant Banner" width="700"/>
+  <img src="https://github.com/NoobForge/Game-Guardian/blob/main/banner2.png" alt="GameGuardian Valorant Banner" width="1000"/>
 </p>
 
-<h1 align="center">🔥 GameGuardian: Valorant Playtime Blocker 🔥</h1>
+<h1 align="center">
+  <img src="https://github.com/NoobForge/Game-Guardian/blob/main/assets/icon.jpeg" width="40" style="vertical-align: middle; margin-right: 10px;">
+  GameGuardian: Valorant Playtime Blocker
+  <img src="https://github.com/NoobForge/Game-Guardian/blob/main/assets/icon.jpeg" width="40" style="vertical-align: middle; margin-left: 10px;">
+</h1>
 
 <p align="center">
   <strong>Limit your Valorant playtime with style — get notified, stay focused, and block the game when time runs out.</strong>
