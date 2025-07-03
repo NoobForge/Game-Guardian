@@ -131,8 +131,9 @@ def valorant_quota_achieved():
     
     try:
         for gamemode in config.read('valorant_mode_match_limit'):
-            if gamemode_played_today(gamemode) >= config.read('valorant_mode_match_limit')[gamemode]:
-                return True
+            if config.read('valorant_mode_blocking_enabled')[gamemode] == True:
+                if gamemode_played_today(gamemode) >= config.read('valorant_mode_match_limit')[gamemode]:
+                    return True
     except: notify('API Error')
     return False
 
