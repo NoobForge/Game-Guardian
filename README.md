@@ -4,7 +4,7 @@
 </p>
 
 <h1 align="center">
-  <img src="https://github.com/NoobForge/Game-Guardian/blob/main/assets/icon.jpeg" width="40" style="vertical-align: middle; margin-right: 10px;">
+  <img src="https://github.com/NoobForge/Game-Guardian/blob/main/icon.png" width="40" style="vertical-align: middle; margin-right: 10px;">
   GameGuardian: Valorant Playtime Blocker
 </h1>
 
