@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://github.com/NoobForge/Game-Guardian/banner.png" alt="GameGuardian Valorant Banner" width="700"/>
+  <img src="https://github.com/Blitzdevdaddy/Game-Guardian/blob/main/banner.png" alt="GameGuardian Valorant Banner" width="700"/>
 </p>
 
 <h1 align="center">🔥 GameGuardian: Valorant Playtime Blocker 🔥</h1>
