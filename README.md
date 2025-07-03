@@ -3,14 +3,21 @@
   <img src="https://github.com/NoobForge/Game-Guardian/blob/main/banner2.png" alt="GameGuardian Valorant Banner" width="1000"/>
 </p>
 
-<h1 align="center">
-  <img src="https://github.com/NoobForge/Game-Guardian/blob/main/icon.png" width="40" style="vertical-align: middle; margin-right: 10px;">
-  GameGuardian: Valorant Playtime Blocker
-</h1>
+<table align="center">
+  <tr>
+    <td>
+      <img src="https://github.com/NoobForge/Game-Guardian/blob/main/icon.png" alt="Logo" width="100"/>
+    </td>
+    <td>
+      <h1 style="margin: 0; padding-left: 20px;">GameGuardian: Valorant Playtime Blocker</h1>
+    </td>
+  </tr>
+</table>
 
 <p align="center">
   <strong>Limit your Valorant playtime with style — get notified, stay focused, and block the game when time runs out.</strong>
 </p>
+
 
 ---
 
@@ -40,4 +47,7 @@
 2. 📁 Clone the repository:
    ```bash
    git clone https://github.com/yourusername/gameguardian
+
+## Made By -
+   Mallika Keshav Manas
 
