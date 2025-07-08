@@ -107,11 +107,6 @@ def utc_to_local(utc_str):
     local_dt = dt.astimezone()
     return local_dt
 
-
-def game_quota_achieved(game):
-    #return true if the set quota has been achieved, otherwise false
-    pass
-
 #baler1on
 def valorant_quota_achieved():
     """Check if the daily match quota for Valorant has been achieved"""
@@ -131,7 +126,7 @@ def valorant_quota_achieved():
     
     try:
         for gamemode in config.read('valorant_mode_match_limit'):
-            if config.read('valorant_mode_blocking_enabled')[gamemode] == True:
+            if config.read('valorant_mode_match_limit')[gamemode] != 0:
                 if gamemode_played_today(gamemode) >= config.read('valorant_mode_match_limit')[gamemode]:
                     return True
     except: notify('API Error')
@@ -191,13 +186,36 @@ def minimize_process(process_name):
 
 
 #testcode
-print(valorant_quota_achieved())
-
-
-
-root = gui()
+#print(valorant_quota_achieved())
+#print(datetime.datetime.now().date())
+#root = gui()
 
     
-#mainloop
-while True:
-    pass
+#baler1on
+def mainloop():
+    while True:
+        if config.read('program_enabled'):
+            time_games = config.read('time_based')
+
+            if config.read('last_recorded_date') != datetime.datetime.now().date():
+                config.write('last_recorded_date', datetime.datetime.now().date())
+                for game in time_games:
+                    game['time_remaining'] = datetime.datetime.now().date()
+            
+            for game in time_games:
+                if game['enabled'] == True:
+                    if process_maximised(game['name']):
+                        if game['time_remaining'] > 0:
+                            game['time_remaining'] -= 30
+                        else:
+                            notify(f"{game['name']} time limit reached")
+                            kill_process(game['name'])
+
+            config.write('time_based',time_games)
+
+        if process_maximised('Valorant'):
+            if valorant_quota_achieved():
+                notify('Valorant match quota achieved')
+                kill_process('Valorant')
+
+        time.sleep(config.read('scanning interval'))
